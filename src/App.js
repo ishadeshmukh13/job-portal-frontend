@@ -38,31 +38,31 @@ function App() {
           />
           <Route
             path="/company"
-            element={isAuthenticated ? <CompanyOrCandidateComponent /> : <LoginPage />}
+            element= {<CompanyOrCandidateComponent /> }
           />
           <Route
             path="/appliedJobs"
-            element={isAuthenticated ? <LandingPage /> : <LoginPage />}
+            element={ <LandingPage /> }
           />
           <Route
             path="/applications"
-            element={isAuthenticated ? <LandingPage /> : <LoginPage />}
+            element={<LandingPage /> }
           />
           <Route
             path="/candidates"
-            element={isAuthenticated ? <LandingPage /> : <LoginPage />}
+            element={<LandingPage /> }
           />
           <Route
             path="/createdJobs"
-            element={isAuthenticated ? <LandingPage /> : <LoginPage />}
+            element={ <LandingPage />}
           />
           <Route
             path="/profile"
-            element={isAuthenticated ? <LandingPage /> : <LoginPage />}
+            element={ <LandingPage /> }
           />
           <Route
             path="/setting"
-            element={isAuthenticated ? <LandingPage /> : <LoginPage />}
+            element={ <LandingPage /> }
           />
           <Route
             path="/"

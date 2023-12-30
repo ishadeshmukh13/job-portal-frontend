@@ -1,16 +1,18 @@
 import { Avatar, Grid, Typography, Box } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import { getProfile } from "../Controller/Controller";
+import React, { useState, useEffect, useContext } from "react";
+import { getProfile,getDataCompanyList } from "../Controller/Controller";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useNavigate } from "react-router";
+import { AppContext } from "../context/createContext";
 const logo = require("../assests/logo.jpg");
 const Header = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
   const userType = localStorage.getItem("userType");
-  const NavItemCandidate = [
+  const context=useContext(AppContext)
+  const NavItemCandidate = [  
     { title: "Home", link: "/home" },
     { title: "Jobs", link: "/jobs" },
     { title: "Company", link: "/company" },
@@ -24,6 +26,7 @@ const Header = () => {
   ];
   const [userData, setUserData] = useState({});
   useEffect(() => {
+    getDataCompanyList(context.updateCompany,1)
     getProfile(userType, setUserData);
   }, []);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -35,8 +38,8 @@ const Header = () => {
     setAnchorEl(null);
   };
   const handleLogoutFn = () => {
-    navigate("/");
     localStorage.clear();
+    navigate("/");
     handleClose();
   };
   const handleProfileFn = () => {
@@ -53,7 +56,7 @@ const Header = () => {
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
-        width: "100vw",
+        width: "100%",
         justifyContent: "space-around",
         position: "sticky",
         background: "rgb(221 203 227 / 52%)",

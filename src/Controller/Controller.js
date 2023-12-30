@@ -38,6 +38,7 @@ async function loginApi(
     }
   }
 }
+
 export async function getProfile(userType, setUserData) {
   try {
     const response = await axios.get(
@@ -58,6 +59,7 @@ export async function getProfile(userType, setUserData) {
     console.error("Error posting data:", error);
   }
 }
+
 export async function SignUpApi(
   userType,
   candidateData,
@@ -89,6 +91,7 @@ export async function SignUpApi(
     setErrorMessage(error.response.data.message);
   }
 }
+
 export async function OtpVerify(
   navigate,
   otp,
@@ -109,4 +112,22 @@ export async function OtpVerify(
   }
 }
 
+export async function getDataCompanyList(updateCompany,page){
+  try {
+    const response = await axios.get(
+      `http://localhost:8000/${localStorage.getItem("userType")}/recruiter-list?page=${page}&limit=${5}`,
+      {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    console.log(response,"controller");
+    if (response?.data?.data) {
+      updateCompany(response?.data?.data);
+    }
+  } catch (error) {
+    console.error("Error posting data:", error);
+  }
+}
 export default loginApi;
