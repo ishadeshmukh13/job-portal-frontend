@@ -1,6 +1,6 @@
 import { Avatar, Grid, Typography, Box } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
-import { getProfile, getDataCompanyList, getJobData } from "../Controller/Controller";
+import { getProfile, getJobData } from "../Controller/Controller";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";

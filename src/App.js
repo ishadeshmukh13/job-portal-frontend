@@ -13,6 +13,7 @@ import LandingPage from "./Pages/LandingPage";
 import CompanyOrCandidateComponent from "./Pages/Company&Candidate";
 import VerifyAccount from "./Pages/VerifyAccount";
 import JobPage from "./Pages/JobPage";
+import ApplyJob from "./Pages/ApplyJob";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/landingpage" element={<LandingPage />} />
           <Route path="/jobs" element={<JobPage />} />
           <Route path="/company" element={<CompanyOrCandidateComponent />} />
-          <Route path="/appliedJobs" element={<LandingPage />} />
+          <Route path="/appliedJobs" element={<ApplyJob />} />
           <Route path="/applications" element={<LandingPage />} />
           <Route path="/candidates" element={<LandingPage />} />
           <Route path="/createdJobs" element={<LandingPage />} />

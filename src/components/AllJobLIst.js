@@ -1,22 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { MainGrid } from "../Pages/LandingPage.js";
-import Header from "./Header.js";
+import React from "react";
 import { Typography, Grid, Box } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
-import ContactsIcon from "@mui/icons-material/Contacts";
-import EmailIcon from "@mui/icons-material/Email";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import styled from "@emotion/styled";
-import { AppContext } from "../context/createContext.js";
 const image = require("../assests/item.jpg");
 
-const JobList = ({ data }) => {
+const JobList = ({ data, handleApplyJob, apply }) => {
   return (
     <Grid style={{}}>
       <Grid item style={styleList.detailsStyle}>
@@ -24,6 +15,7 @@ const JobList = ({ data }) => {
           data.map((item, index) => {
             return (
               <Card
+                key={index}
                 sx={{ maxWidth: 345 }}
                 style={{ margin: "15px", padding: "10px" }}
               >
@@ -37,12 +29,19 @@ const JobList = ({ data }) => {
                     style={{ fontSize: "19px", fontWeight: 600 }}
                     component="div"
                   >
-                    Company name: {item.company_name}
+                    Company name:{" "}
+                    {item?.company_name
+                      ? item?.company_name
+                      : item?.jobData?.company_name}
                   </Typography>
                   <Box style={{ display: "flex", flexDirection: "column" }}>
-                    <Box style={{ display: "flex" }}>
+                    <Box style={{ display: "flex", paddingLeft: "10px" }}>
                       <Typography
-                        style={{ paddingLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          marginBottom: "10px",
+                          fontSize: "17px",
+                          fontWeight: 700,
+                        }}
                       >
                         {"Job_title : "}
                       </Typography>
@@ -50,12 +49,19 @@ const JobList = ({ data }) => {
                         style={{ paddingLeft: "10px", marginBottom: "10px" }}
                       >
                         {" "}
-                        {item.job_title}
+                        {item?.job_title
+                          ? item?.job_title
+                          : item?.jobData?.job_title}
                       </Typography>
                     </Box>
                     <Box style={{ display: "flex" }}>
                       <Typography
-                        style={{ paddingLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          paddingLeft: "10px",
+                          marginBottom: "10px",
+                          fontSize: "17px",
+                          fontWeight: 700,
+                        }}
                       >
                         {"experience_required : "}
                       </Typography>
@@ -63,12 +69,19 @@ const JobList = ({ data }) => {
                         style={{ paddingLeft: "10px", marginBottom: "10px" }}
                       >
                         {" "}
-                        {item.experience_required}
+                        {item.experience_required
+                          ? item?.experience_required
+                          : item?.jobData?.experience_required}
                       </Typography>
                     </Box>
                     <Box style={{ display: "flex" }}>
                       <Typography
-                        style={{ paddingLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          paddingLeft: "10px",
+                          marginBottom: "10px",
+                          fontSize: "17px",
+                          fontWeight: 700,
+                        }}
                       >
                         {"working_hours : "}
                       </Typography>
@@ -76,12 +89,19 @@ const JobList = ({ data }) => {
                         style={{ paddingLeft: "10px", marginBottom: "10px" }}
                       >
                         {" "}
-                        {item.working_hours}
+                        {item?.working_hours
+                          ? item?.working_hours
+                          : item?.jobData?.working_hours}
                       </Typography>
                     </Box>
                     <Box style={{ display: "flex" }}>
                       <Typography
-                        style={{ paddingLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          paddingLeft: "10px",
+                          marginBottom: "10px",
+                          fontSize: "17px",
+                          fontWeight: 700,
+                        }}
                       >
                         {"total_application : "}
                       </Typography>
@@ -89,12 +109,19 @@ const JobList = ({ data }) => {
                         style={{ paddingLeft: "10px", marginBottom: "10px" }}
                       >
                         {" "}
-                        {item.total_application}
+                        {item?.total_application
+                          ? item?.total_application
+                          : item?.jobData?.total_application}
                       </Typography>
                     </Box>
                     <Box style={{ display: "flex" }}>
                       <Typography
-                        style={{ paddingLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          paddingLeft: "10px",
+                          marginBottom: "10px",
+                          fontSize: "17px",
+                          fontWeight: 700,
+                        }}
                       >
                         {"location : "}
                       </Typography>
@@ -102,13 +129,20 @@ const JobList = ({ data }) => {
                         style={{ paddingLeft: "10px", marginBottom: "10px" }}
                       >
                         {" "}
-                        {item.location}
+                        {item?.location
+                          ? item?.location
+                          : item?.jobData?.location}
                       </Typography>
                     </Box>
 
                     <Box style={{ display: "flex" }}>
                       <Typography
-                        style={{ paddingLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          paddingLeft: "10px",
+                          marginBottom: "10px",
+                          fontSize: "17px",
+                          fontWeight: 700,
+                        }}
                       >
                         {"no_of_jobs : "}
                       </Typography>
@@ -116,12 +150,19 @@ const JobList = ({ data }) => {
                         style={{ paddingLeft: "10px", marginBottom: "10px" }}
                       >
                         {" "}
-                        {item.no_of_jobs}
+                        {item?.no_of_jobsitem
+                          ? item.no_of_jobsitem
+                          : item?.jobData?.no_of_jobsitem}
                       </Typography>
                     </Box>
                     <Box style={{ display: "flex" }}>
                       <Typography
-                        style={{ paddingLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          paddingLeft: "10px",
+                          marginBottom: "10px",
+                          fontSize: "17px",
+                          fontWeight: 700,
+                        }}
                       >
                         {"workspace : "}
                       </Typography>
@@ -129,12 +170,19 @@ const JobList = ({ data }) => {
                         style={{ paddingLeft: "10px", marginBottom: "10px" }}
                       >
                         {" "}
-                        {item.workspace}
+                        {item?.workspace
+                          ? item?.workspace
+                          : item?.jobData?.workspace}
                       </Typography>
                     </Box>
                     <Box style={{ display: "flex" }}>
                       <Typography
-                        style={{ paddingLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          paddingLeft: "10px",
+                          marginBottom: "10px",
+                          fontSize: "17px",
+                          fontWeight: 700,
+                        }}
                       >
                         {"job_type : "}
                       </Typography>
@@ -142,33 +190,49 @@ const JobList = ({ data }) => {
                         style={{ paddingLeft: "10px", marginBottom: "10px" }}
                       >
                         {" "}
-                        {item.job_type}
+                        {item?.job_type
+                          ? item?.job_type
+                          : item?.jobData?.job_type}
                       </Typography>
                     </Box>
                     <Box style={{ display: "flex", marginBottom: "10px" }}>
                       <Typography
-                        style={{ paddingLeft: "10px", marginBottom: "10px" }}
+                        style={{
+                          paddingLeft: "10px",
+                          marginBottom: "10px",
+                          fontSize: "17px",
+                          fontWeight: 700,
+                        }}
                       >
                         {"skills : "}
                       </Typography>
                       <Typography style={{ paddingLeft: "10px" }}>
                         {" "}
-                        {item.skills}
+                        {item?.skills ? item?.skills : item?.jobData?.skills}
                       </Typography>
                     </Box>
                   </Box>
                 </CardContent>
                 <CardActions>
-                  <Button
-                    variant="contained"
-                    style={{
-                      background: "rgb(221 203 227 / 52%)",
-                      color: "black",
-                      width:"100%"
-                    }}
-                  >
-                    Apply
-                  </Button>
+                  {apply === true ? (
+                    <Button
+                      variant="contained"
+                      style={{
+                        background: "rgb(221 203 227 / 52%)",
+                        color: "black",
+                        width: "100%",
+                      }}
+                      onClick={() => {
+                        handleApplyJob(item._id);
+                      }}
+                    >
+                      Apply
+                    </Button>
+                  ) : (
+                    <Typography style={{ fontSize: "16px", fontWeight: 700 }}>
+                      Applied time : {item.applied_time}
+                    </Typography>
+                  )}{" "}
                 </CardActions>
               </Card>
             );

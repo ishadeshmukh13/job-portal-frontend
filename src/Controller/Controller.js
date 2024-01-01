@@ -18,7 +18,7 @@ async function loginApi(
   } else {
     try {
       const response = await axios.post(
-        `http://localhost:8000/${userType}/sign-in`,
+        `http://localhost:8800/${userType}/sign-in`,
         loginData
       );
       navigate("/landingpage");
@@ -45,7 +45,7 @@ async function loginApi(
 export async function getProfile(userType, setUserData) {
   try {
     const response = await axios.get(
-      `http://localhost:8000/${userType}/getProfile`,
+      `http://localhost:8800/${userType}/getProfile`,
       {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
@@ -83,7 +83,7 @@ export async function SignUpApi(
 
   try {
     const response = await axios.post(
-      `http://localhost:8000/${localStorage.getItem("userType")}/sign-up`,
+      `http://localhost:8800/${localStorage.getItem("userType")}/sign-up`,
       data
     );
     if (
@@ -109,13 +109,12 @@ export async function SignUpApi(
 export async function ResentOtp(email, setOtpOpen, setError, setErrorMessage) {
   try {
     const response = await axios.put(
-      `http://localhost:8000/${localStorage.getItem("userType")}/resend-otp`,
-      {email:email}
+      `http://localhost:8800/${localStorage.getItem("userType")}/resend-otp`,
+      { email: email }
     );
-   if(response.data.message=="OTP resent successfully in your email"){
-
-     setOtpOpen(true);
-   }
+    if (response.data.message == "OTP resent successfully in your email") {
+      setOtpOpen(true);
+    }
   } catch (error) {
     setError(true);
     if (error?.response?.data?.error) {
@@ -136,7 +135,7 @@ export async function OtpVerify(
 ) {
   try {
     const response = await axios.put(
-      `http://localhost:8000/${userType}/otp-verify`,
+      `http://localhost:8800/${userType}/otp-verify`,
       { otp, email }
     );
     navigate("/signIn");
@@ -149,7 +148,7 @@ export async function OtpVerify(
 export async function getDataCompanyList(updateCompany, page) {
   try {
     const response = await axios.get(
-      `http://localhost:8000/${localStorage.getItem(
+      `http://localhost:8800/${localStorage.getItem(
         "userType"
       )}/recruiter-list?page=${page}&limit=${5}`,
       {
@@ -170,9 +169,7 @@ export async function getDataCompanyList(updateCompany, page) {
 export async function getJobData(updateJobData) {
   try {
     const response = await axios.get(
-      `http://localhost:8000/${localStorage.getItem(
-        "userType"
-      )}/job-list`,
+      `http://localhost:8800/${localStorage.getItem("userType")}/job-list`,
       {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
@@ -183,6 +180,46 @@ export async function getJobData(updateJobData) {
     if (response?.data?.data) {
       updateJobData(response?.data?.data);
     }
+  } catch (error) {
+    console.error("Error posting data:", error);
+  }
+}
+
+export async function getApplyJob(job_id,setPopUp,setMessage) {
+  try {
+    const response = await axios.post(
+      `http://localhost:8800/${localStorage.getItem("userType")}/apply-job`,
+      {
+        job_id: job_id,
+      },
+      {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    setPopUp(true)
+    setMessage(response?.data?.message)
+    console.log(response, "controller");
+  
+  } catch (error) {
+    console.error("Error posting data:", error);
+  }
+}
+
+export async function getApplyJobList(updateJobData) {
+  try {
+    const response = await axios.get(
+      `http://localhost:8800/${localStorage.getItem("userType")}/apply-job-list`,
+     
+      {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      }
+    );
+  updateJobData(response?.data?.data)
+  
   } catch (error) {
     console.error("Error posting data:", error);
   }

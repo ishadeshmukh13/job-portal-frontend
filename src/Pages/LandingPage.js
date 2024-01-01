@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import { Grid, Typography } from "@mui/material";
 import { Box, styled } from "@mui/system";
@@ -8,6 +8,11 @@ import CheckIcon from "@mui/icons-material/Check";
 import ListOfData from "../components/ListOfData";
 import { AppContext } from "../context/createContext";
 import JobList from "../components/AllJobLIst";
+import { getApplyJob } from "../Controller/Controller";
+
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
 export const MainGrid = styled(Grid)({
   overflowY: "auto",
   maxWidth: "100vw",
@@ -24,8 +29,19 @@ const LandingPage = () => {
       navigate("/");
     }
   });
+  const [otpPopUp, setPopUp] = useState(false);
+  const [message, setMessage] = useState("");
+  const handleClose = () => {
+    setPopUp(false);
+  };
+
+  const handleApplyJob = (job_id) => {
+    console.log("hello",job_id);
+    getApplyJob(job_id, setPopUp, setMessage);
+  };
   return (
     <MainGrid>
+   
       <Header />
       <Box
         style={{
@@ -33,6 +49,21 @@ const LandingPage = () => {
           paddingBlock: "50px",
         }}
       >
+           <Snackbar
+        open={otpPopUp}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <MuiAlert
+          elevation={6}
+          variant="filled"
+          onClose={handleClose}
+          severity="info"
+        >
+          {message}
+        </MuiAlert>
+      </Snackbar>
         <Box
           style={{
             display: "flex",
@@ -86,6 +117,8 @@ const LandingPage = () => {
           {context.allJob.length > 0 && (
             <JobList
               data={context.allJob.slice(0, 3)}
+              handleApplyJob={handleApplyJob}
+              apply={true}
             />
           )}
         </Box>
@@ -118,7 +151,7 @@ const LandingPage = () => {
           justifyContent: "center",
           marginTop: "20px",
           paddingBlock: "50px",
-          flexWrap:"wrap",
+          flexWrap: "wrap",
         }}
       >
         <Box style={{ paddingInline: "50px" }}>
@@ -132,7 +165,8 @@ const LandingPage = () => {
           <Typography
             style={{ fontSize: "17px", fontWeight: 400, marginBlock: "20px" }}
           >
-            Search all the open positions on the web. Get your own personalized<br/>
+            Search all the open positions on the web. Get your own personalized
+            <br />
             salary estimate. Read reviews on over 600,000 companies worldwide.
           </Typography>
           <Box
