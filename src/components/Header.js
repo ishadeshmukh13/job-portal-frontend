@@ -1,6 +1,6 @@
 import { Avatar, Grid, Typography, Box } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
-import { getProfile,getDataCompanyList } from "../Controller/Controller";
+import { getProfile, getDataCompanyList } from "../Controller/Controller";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -9,24 +9,24 @@ import { useNavigate } from "react-router";
 import { AppContext } from "../context/createContext";
 const logo = require("../assests/logo.jpg");
 const Header = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const userType = localStorage.getItem("userType");
-  const context=useContext(AppContext)
-  const NavItemCandidate = [  
-    { title: "Home", link: "/home" },
+  const context = useContext(AppContext);
+  const NavItemCandidate = [
+    { title: "Home", link: "/landingpage" },
     { title: "Jobs", link: "/jobs" },
     { title: "Company", link: "/company" },
     { title: "Applied Jobs", link: "/appliedJobs" },
   ];
   const NavItemRecruiter = [
-    { title: "Home", link: "/home" },
+    { title: "Home", link: "/landingpage" },
     { title: "Applications", link: "/applications" },
     { title: "Candidates", link: "/candidates" },
     { title: "Created Jobs", link: "/createdJobs" },
   ];
   const [userData, setUserData] = useState({});
   useEffect(() => {
-    getDataCompanyList(context.updateCompany,1)
+    getDataCompanyList(context.updateCompany, 1);
     getProfile(userType, setUserData);
   }, []);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -38,8 +38,8 @@ const Header = () => {
     setAnchorEl(null);
   };
   const handleLogoutFn = () => {
-    localStorage.clear();
     navigate("/");
+    localStorage.clear();
     handleClose();
   };
   const handleProfileFn = () => {
@@ -125,16 +125,14 @@ const Header = () => {
         </Typography>
         <Button
           id="basic-button"
-          aria-controls={open ? "basic-menu" : undefined}
           aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
         >
           <Avatar
             style={{ width: "50px", height: "50px", paddingLeft: "10px" }}
             src={userData?.profile ? userData?.profile : "/broken-image.jpg"}
           />
-          <ArrowDropDownIcon style={{ color: "white" }} />
+          <ArrowDropDownIcon style={{ color: "black" }} />
         </Button>
         <Menu
           id="basic-menu"

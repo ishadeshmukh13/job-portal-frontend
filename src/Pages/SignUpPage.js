@@ -49,9 +49,8 @@ const SignUpPage = () => {
     setError(false);
   };
   const handleSignUp = () => {
+    console.log(candidateData,"candidatedattt");
     SignUpApi(
-      navigate,
-      userType,
       candidateData,
       recruiterData,
       setOtpOpen,
@@ -258,6 +257,24 @@ const SignUpPage = () => {
           >
             Sign Up
           </Button>
+          <Typography style={{fontSize:"18px",fontWeight:500}}>
+            or
+          </Typography>
+          <Button  variant="contained"
+            style={{
+              background: "#2F3C7E",
+              width: "150px",
+              height: "40px",
+              fontSize: "20px",
+              textTransform: "unset",
+              marginTop: "10px",
+              marginBottom: "10px",
+            }}
+            onClick={() => {
+              navigate("/verifyaccount")
+            }}>
+            verify
+          </Button>
           <Dialog onClose={handleClose} open={otpOpen}>
             <DialogTitle style={{ textAlign: "center" }}>
               OTP verification
@@ -292,7 +309,7 @@ const SignUpPage = () => {
                   marginBottom: "10px",
                 }}
               >
-                Submit
+                Verify
               </Button>
             </Box>
           </Dialog>

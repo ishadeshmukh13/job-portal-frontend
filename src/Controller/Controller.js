@@ -15,24 +15,27 @@ async function loginApi(
   if (!isValidEmail(loginData.email) || loginData.password === "") {
     setError(true);
     setErrorMessage("email or password must be required");
-  }
-  else{
-
+  } else {
     try {
       const response = await axios.post(
         `http://localhost:8000/${userType}/sign-in`,
         loginData
       );
-      navigate("/home");
+      navigate("/landingpage");
       localStorage.setItem("token", response.data.data.token);
     } catch (error) {
-      if(error?.response?.data?.message ==="please provide right email or password"){
+      if (
+        error?.response?.data?.message ===
+        "please provide right email or password"
+      ) {
         setError(true);
-      setErrorMessage(error?.response?.data?.message);
-      }
-      else if( error?.response?.data?.message ==="Recruiter not found with the provided email"){
+        setErrorMessage(error?.response?.data?.message);
+      } else if (
+        error?.response?.data?.message ===
+        "Recruiter not found with the provided email"
+      ) {
         setError(true);
-      setErrorMessage(error?.response?.data?.message);
+        setErrorMessage(error?.response?.data?.message);
       }
       console.error("Error posting data:", error?.response?.data?.message);
     }
@@ -61,7 +64,6 @@ export async function getProfile(userType, setUserData) {
 }
 
 export async function SignUpApi(
-  userType,
   candidateData,
   recruiterData,
   setOtpOpen,
@@ -69,8 +71,7 @@ export async function SignUpApi(
   setErrorMessage
 ) {
   let data = new FormData();
-
-  if (userType === "candidate") {
+  if (localStorage.getItem("userType") == "candidate") {
     for (const key in candidateData) {
       data.append(key, candidateData[key]);
     }
@@ -82,13 +83,46 @@ export async function SignUpApi(
 
   try {
     const response = await axios.post(
-      `http://localhost:8000/${userType}/sign-up`,
+      `http://localhost:8000/${localStorage.getItem("userType")}/sign-up`,
       data
     );
-    setOtpOpen(true);
+    if (
+      response?.data?.message ===
+      "email already exits please verify your email and you can't create account using this email "
+    ) {
+      setError(true);
+      setErrorMessage(response?.data?.message);
+    } else {
+      setOtpOpen(true);
+    }
+  } catch (error) {
+    console.log(error, "errorrrrrrrrrrrrrrrrrrrr");
+    setError(true);
+    if (error?.response?.data?.error) {
+      setErrorMessage(error.response.data.error);
+    } else {
+      setErrorMessage(error.response.data.message);
+    }
+  }
+}
+
+export async function ResentOtp(email, setOtpOpen, setError, setErrorMessage) {
+  try {
+    const response = await axios.put(
+      `http://localhost:8000/${localStorage.getItem("userType")}/resend-otp`,
+      {email:email}
+    );
+   if(response.data.message=="OTP resent successfully in your email"){
+
+     setOtpOpen(true);
+   }
   } catch (error) {
     setError(true);
-    setErrorMessage(error.response.data.message);
+    if (error?.response?.data?.error) {
+      setErrorMessage(error.response.data.error);
+    } else {
+      setErrorMessage(error.response.data.message);
+    }
   }
 }
 
@@ -112,17 +146,19 @@ export async function OtpVerify(
   }
 }
 
-export async function getDataCompanyList(updateCompany,page){
+export async function getDataCompanyList(updateCompany, page) {
   try {
     const response = await axios.get(
-      `http://localhost:8000/${localStorage.getItem("userType")}/recruiter-list?page=${page}&limit=${5}`,
+      `http://localhost:8000/${localStorage.getItem(
+        "userType"
+      )}/recruiter-list?page=${page}&limit=${5}`,
       {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
       }
     );
-    console.log(response,"controller");
+    console.log(response, "controller");
     if (response?.data?.data) {
       updateCompany(response?.data?.data);
     }

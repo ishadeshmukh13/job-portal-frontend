@@ -10,73 +10,28 @@ import {
 } from "react-router-dom";
 import ShareContext from "./context/createContext";
 import LandingPage from "./Pages/LandingPage";
-import { useEffect, useState } from "react";
-import ListOfData from "./components/ListOfData";
 import CompanyOrCandidateComponent from "./Pages/Company&Candidate";
+import VerifyAccount from "./Pages/VerifyAccount";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    console.log(token !== null);
-    setIsAuthenticated(token !== null);
-  }, []);
-
   return (
     <ShareContext>
       <Router>
         <Routes>
-          <Route path="/home" element={<LandingPage />} />
-          <Route
-            path="/signIn"
-            element={isAuthenticated ? <LandingPage /> : <LoginPage />}
-          />
-          <Route
-            path="/jobs"
-            element={isAuthenticated ? <LandingPage /> : <LoginPage />}
-          />
-          <Route
-            path="/company"
-            element= {<CompanyOrCandidateComponent /> }
-          />
-          <Route
-            path="/appliedJobs"
-            element={ <LandingPage /> }
-          />
-          <Route
-            path="/applications"
-            element={<LandingPage /> }
-          />
-          <Route
-            path="/candidates"
-            element={<LandingPage /> }
-          />
-          <Route
-            path="/createdJobs"
-            element={ <LandingPage />}
-          />
-          <Route
-            path="/profile"
-            element={ <LandingPage /> }
-          />
-          <Route
-            path="/setting"
-            element={ <LandingPage /> }
-          />
-          <Route
-            path="/"
-            element={isAuthenticated ? <LandingPage /> : <HomePage />}
-          />
-          <Route
-            path="/signup"
-            element={isAuthenticated ? <LandingPage /> : <SignUpPage />}
-          />
-          <Route
-            path="/resetPassword"
-            element={isAuthenticated ? <LandingPage /> : <ResetPassword />}
-          />
-          {/* Default route for unknown paths */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/signIn" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/landingpage" element={<LandingPage />} />
+          <Route path="/jobs" element={<LandingPage />} />
+          <Route path="/company" element={<CompanyOrCandidateComponent />} />
+          <Route path="/appliedJobs" element={<LandingPage />} />
+          <Route path="/applications" element={<LandingPage />} />
+          <Route path="/candidates" element={<LandingPage />} />
+          <Route path="/createdJobs" element={<LandingPage />} />
+          <Route path="/profile" element={<LandingPage />} />
+          <Route path="/setting" element={<LandingPage />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
+          <Route path="/verifyaccount" element={<VerifyAccount />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
