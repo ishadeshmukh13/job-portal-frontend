@@ -12,6 +12,7 @@ import ShareContext from "./context/createContext";
 import LandingPage from "./Pages/LandingPage";
 import CompanyOrCandidateComponent from "./Pages/Company&Candidate";
 import VerifyAccount from "./Pages/VerifyAccount";
+import JobPage from "./Pages/JobPage";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route path="/signIn" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/landingpage" element={<LandingPage />} />
-          <Route path="/jobs" element={<LandingPage />} />
+          <Route path="/jobs" element={<JobPage />} />
           <Route path="/company" element={<CompanyOrCandidateComponent />} />
           <Route path="/appliedJobs" element={<LandingPage />} />
           <Route path="/applications" element={<LandingPage />} />

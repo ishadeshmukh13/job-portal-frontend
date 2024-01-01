@@ -7,6 +7,7 @@ const wallpaper = require("../assests/landingpageCandidate.webp");
 import CheckIcon from "@mui/icons-material/Check";
 import ListOfData from "../components/ListOfData";
 import { AppContext } from "../context/createContext";
+import JobList from "../components/AllJobLIst";
 export const MainGrid = styled(Grid)({
   overflowY: "auto",
   maxWidth: "100vw",
@@ -82,10 +83,9 @@ const LandingPage = () => {
           >
             Recent Jobs
           </Typography>
-          {context.companyData?.data?.length > 0 && (
-            <ListOfData
-              data={context.companyData.data.slice(0, 3)}
-              pagination={false}
+          {context.allJob.length > 0 && (
+            <JobList
+              data={context.allJob.slice(0, 3)}
             />
           )}
         </Box>

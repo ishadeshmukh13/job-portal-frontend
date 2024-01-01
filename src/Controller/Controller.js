@@ -166,4 +166,25 @@ export async function getDataCompanyList(updateCompany, page) {
     console.error("Error posting data:", error);
   }
 }
+
+export async function getJobData(updateJobData) {
+  try {
+    const response = await axios.get(
+      `http://localhost:8000/${localStorage.getItem(
+        "userType"
+      )}/job-list`,
+      {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    console.log(response, "controller");
+    if (response?.data?.data) {
+      updateJobData(response?.data?.data);
+    }
+  } catch (error) {
+    console.error("Error posting data:", error);
+  }
+}
 export default loginApi;

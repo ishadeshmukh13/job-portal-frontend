@@ -4,6 +4,7 @@ import { useState } from "react";
 const ShareContext = (props) => {
   const [userType, setUserType] = useState("");
   const [companyData, setCompanyData] = useState([]);
+  const [allJob, setAllJob] = useState([]);
   const updateUserType = (type) => {
     localStorage.setItem("userType",type)
    setUserType(type)
@@ -11,8 +12,11 @@ const ShareContext = (props) => {
   const updateCompany=(data)=>{
     setCompanyData(data)
   }
+  const updateJobData=(data)=>{
+    setAllJob(data)
+  }
   return (
-    <AppContext.Provider value={{ userType, updateUserType ,companyData,updateCompany}}>
+    <AppContext.Provider value={{ userType, updateUserType ,companyData,updateCompany,updateJobData,allJob}}>
       {props.children}
     </AppContext.Provider>
   );

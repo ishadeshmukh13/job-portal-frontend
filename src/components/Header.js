@@ -1,6 +1,6 @@
 import { Avatar, Grid, Typography, Box } from "@mui/material";
 import React, { useState, useEffect, useContext } from "react";
-import { getProfile, getDataCompanyList } from "../Controller/Controller";
+import { getProfile, getDataCompanyList, getJobData } from "../Controller/Controller";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -26,7 +26,7 @@ const Header = () => {
   ];
   const [userData, setUserData] = useState({});
   useEffect(() => {
-    getDataCompanyList(context.updateCompany, 1);
+    getJobData(context.updateJobData);
     getProfile(userType, setUserData);
   }, []);
   const [anchorEl, setAnchorEl] = useState(null);
