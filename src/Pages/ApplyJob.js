@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import JobList from "../components/AllJobLIst";
 import { getApplyJobList } from "../Controller/Controller";
 import { AppContext } from "../context/createContext";
+import { Typography } from "@mui/material";
 
 const ApplyJob = () => {
   const context = useContext(AppContext);
@@ -11,11 +12,23 @@ const ApplyJob = () => {
     getApplyJobList(context.updateApplyJobData);
   }, []);
   const data = context.applyJobList;
-  console.log(data);
   return (
     <MainGrid>
       <Header />
-      {data && data.length > 0 && <JobList data={data} />}
+      {data && data.length > 0 ? (
+        <JobList data={data} />
+      ) : (
+        <Typography
+          style={{
+            fontSize: "25px",
+            fontWeight: 700,
+            textAlign: "center",
+            marginTop: "100px",
+          }}
+        >
+          You have not applied for any job.
+        </Typography>
+      )}
     </MainGrid>
   );
 };
