@@ -20,6 +20,7 @@ const ApplyJob = () => {
       ) : (
         <Typography
           style={{
+            paddingBlock: "150px",
             fontSize: "25px",
             fontWeight: 700,
             textAlign: "center",

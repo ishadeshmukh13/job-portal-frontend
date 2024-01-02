@@ -11,20 +11,26 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 const image = require("../assests/item.jpg");
 
-const ListOfData = ({ data ,page,handleChange,pagination}) => {
-
+const ListOfData = ({ data, page, handleChange, pagination }) => {
   return (
-    <Grid style={{}}>
+    <Grid
+      style={{
+        paddingBlock: "150px",
+      }}
+    >
       <Grid item style={styleList.detailsStyle}>
         {data &&
-         data.map((item, index) => {
+          data.map((item, index) => {
             return (
               <Card
-              key={index}
+                key={index}
                 sx={{ maxWidth: 345 }}
                 style={{ margin: "15px", padding: "10px" }}
               >
-                <CardMedia sx={{ height: 140 }} image={item?.profile?item?.profile:image} />
+                <CardMedia
+                  sx={{ height: 140 }}
+                  image={item?.profile ? item?.profile : image}
+                />
                 <CardContent>
                   <Typography
                     gutterBottom
@@ -76,17 +82,19 @@ const ListOfData = ({ data ,page,handleChange,pagination}) => {
             );
           })}
       </Grid>
-     {pagination && <Box style={{ display: "flex", justifyContent: "center" }}>
-        <Stack spacing={2}>
-          <Pagination
-            page={page}
-            count={data?.totalPages ? data?.totalPages : 1}
-            onChange={(event, value) => handleChange(value)}
-            variant="outlined"
-            color="secondary"
-          />
-        </Stack>
-      </Box>}
+      {pagination && (
+        <Box style={{ display: "flex", justifyContent: "center" }}>
+          <Stack spacing={2}>
+            <Pagination
+              page={page}
+              count={data?.totalPages ? data?.totalPages : 1}
+              onChange={(event, value) => handleChange(value)}
+              variant="outlined"
+              color="secondary"
+            />
+          </Stack>
+        </Box>
+      )}
     </Grid>
   );
 };

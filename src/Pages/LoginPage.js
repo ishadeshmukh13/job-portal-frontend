@@ -26,7 +26,6 @@ export const LoginForm = styled(Box)({
   borderRadius: "8px",
   paddingBottom: "20px",
   "&:hover": {
-    background: "rgb(227 203 204 / 82%)",
     "& .avatarStyle": {
       backgroundColor: "#2F3C7E",
     },

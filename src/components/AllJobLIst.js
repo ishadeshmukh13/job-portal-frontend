@@ -9,7 +9,10 @@ const image = require("../assests/item.jpg");
 
 const JobList = ({ data, handleApplyJob, apply }) => {
   return (
-    <Grid style={{}}>
+    <Grid style={{
+            paddingBlock: "150px",
+
+          }}>
       <Grid item style={styleList.detailsStyle}>
         {data &&
           data.map((item, index) => {

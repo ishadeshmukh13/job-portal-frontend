@@ -55,7 +55,7 @@ const Header = () => {
         flexWrap: "wrap",
         width: "100%",
         justifyContent: "space-around",
-        position: "sticky",
+        position: "fixed",
         background: "rgb(221 203 227 / 52%)",
         padding: "3px",
         alignItems: "center",

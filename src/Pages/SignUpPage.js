@@ -88,7 +88,7 @@ const SignUpPage = () => {
         </MuiAlert>
       </Snackbar>
       <Box style={LoginStyle.secondBox}>
-        <LoginForm style={LoginStyle.smallBoxGrid}>
+        <LoginForm style={{overflowY:"auto",maxHeight:"60vh",height:"100",overflowX:"hidden",...LoginStyle.smallBoxGrid}} >
           <AvatarStyle src="/broken-image.jpg" className="avatarStyle" />
           <Typography
             style={{

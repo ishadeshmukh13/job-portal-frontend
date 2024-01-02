@@ -46,7 +46,7 @@ const LandingPage = () => {
       <Box
         style={{
           background: "rgb(221 203 227 / 52%)",
-          paddingBlock: "50px",
+          paddingBlock: "150px",
         }}
       >
            <Snackbar

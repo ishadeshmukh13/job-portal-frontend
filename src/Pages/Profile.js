@@ -1,11 +1,12 @@
 import React from "react";
 import { MainGrid } from "./LandingPage";
 import Header from "../components/Header";
-import { Typography, Box, Avatar } from "@mui/material";
+import { Typography, Box, Avatar, Button } from "@mui/material";
 import BadgeIcon from "@mui/icons-material/Badge";
 import PlaceIcon from "@mui/icons-material/Place";
 import CallIcon from "@mui/icons-material/Call";
 import EmailIcon from "@mui/icons-material/Email";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 const ExperienceIcon = require("../assests/experienceIcon.png");
 const SkillIcon = require("../assests/skillsIcon.webp");
 const Profile = () => {
@@ -14,6 +15,7 @@ const Profile = () => {
       <Header />
       <Box
         style={{
+          paddingBlock: "150px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -22,12 +24,15 @@ const Profile = () => {
       >
         <Avatar
           src={localStorage.getItem("profile")}
-          style={{ width: "200px", height: "200px",
-          marginTop: "20px",
-         }}
+          style={{ width: "200px", height: "200px", marginTop: "20px" }}
         />
         <Box
-          style={{ display: "flex", flexDirection: "row", marginTop: "30px" }}
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginTop: "30px",
+            flexWrap: "wrap",
+          }}
         >
           <Box
             style={{
@@ -40,6 +45,8 @@ const Profile = () => {
               marginInline: "10px",
               borderRadius: "10px",
               border: "0.1px solid",
+              padding: "10px",
+              margin: "10px",
             }}
           >
             <Typography
@@ -61,7 +68,7 @@ const Profile = () => {
           </Box>
           <Box
             style={{
-              width: "250px",
+              width: "200px",
               height: "200px",
               background: "rgb(221 203 227 / 52%)",
               justifyContent: "center",
@@ -70,6 +77,8 @@ const Profile = () => {
               marginInline: "10px",
               borderRadius: "10px",
               border: "0.1px solid",
+              padding: "10px",
+              margin: "10px",
             }}
           >
             <Typography
@@ -106,6 +115,9 @@ const Profile = () => {
               marginInline: "10px",
               borderRadius: "10px",
               border: "0.1px solid",
+              margin: "10px",
+
+              padding: "10px",
             }}
           >
             <Typography
@@ -136,6 +148,9 @@ const Profile = () => {
               marginInline: "10px",
               borderRadius: "10px",
               border: "0.1px solid",
+              margin: "10px",
+
+              padding: "10px",
             }}
           >
             <Typography
@@ -166,6 +181,9 @@ const Profile = () => {
               marginInline: "10px",
               borderRadius: "10px",
               border: "0.1px solid",
+              margin: "10px",
+
+              padding: "10px",
             }}
           >
             <Typography
@@ -199,6 +217,9 @@ const Profile = () => {
               marginInline: "10px",
               borderRadius: "10px",
               border: "0.1px solid",
+              margin: "10px",
+
+              padding: "10px",
             }}
           >
             <Typography
@@ -219,6 +240,19 @@ const Profile = () => {
             </Typography>
           </Box>
         </Box>
+        <Button
+          variant="contained"
+          style={{
+            background: "rgb(221 203 227 / 52%)",
+            color: "black",
+            width:"120px",
+            fontSize:"17px",
+            fontWeight:"700"
+          }}
+        >
+          Edit
+          <ModeEditIcon style={{marginLeft:"5px"}}/>
+        </Button>
       </Box>
     </MainGrid>
   );
