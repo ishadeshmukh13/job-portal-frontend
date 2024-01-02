@@ -57,6 +57,11 @@ export async function getProfile(userType, setUserData) {
       localStorage.setItem("profile", response?.data?.data?.profile);
       localStorage.setItem("email", response?.data?.data?.email);
       localStorage.setItem("name", response?.data?.data?.name);
+      localStorage.setItem("mobile_no", response?.data?.data?.mobile_no);
+      localStorage.setItem("skills", response?.data?.data?.skills); 
+      localStorage.setItem("experience", response?.data?.data?.experience); 
+      localStorage.setItem("city", response?.data?.data?.city); 
+      
     }
   } catch (error) {
     console.error("Error posting data:", error);

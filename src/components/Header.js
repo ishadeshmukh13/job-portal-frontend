@@ -46,10 +46,7 @@ const Header = () => {
     navigate("/profile");
     handleClose();
   };
-  const handleSettingsFn = () => {
-    navigate("/setting");
-    handleClose();
-  };
+ 
   return (
     <Grid
       style={{
@@ -144,7 +141,6 @@ const Header = () => {
           }}
         >
           <MenuItem onClick={() => handleProfileFn()}>Profile</MenuItem>
-          <MenuItem onClick={() => handleSettingsFn()}>setting</MenuItem>
           <MenuItem onClick={() => handleLogoutFn()}>Logout</MenuItem>
         </Menu>
       </Box>

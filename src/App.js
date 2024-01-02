@@ -14,6 +14,7 @@ import CompanyOrCandidateComponent from "./Pages/Company&Candidate";
 import VerifyAccount from "./Pages/VerifyAccount";
 import JobPage from "./Pages/JobPage";
 import ApplyJob from "./Pages/ApplyJob";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -30,8 +31,7 @@ function App() {
           <Route path="/applications" element={<LandingPage />} />
           <Route path="/candidates" element={<LandingPage />} />
           <Route path="/createdJobs" element={<LandingPage />} />
-          <Route path="/profile" element={<LandingPage />} />
-          <Route path="/setting" element={<LandingPage />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/resetPassword" element={<ResetPassword />} />
           <Route path="/verifyaccount" element={<VerifyAccount />} />
           <Route path="*" element={<Navigate to="/" />} />
