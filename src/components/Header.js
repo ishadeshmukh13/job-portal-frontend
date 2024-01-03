@@ -27,7 +27,8 @@ const Header = () => {
   useEffect(() => {
     getJobData(context.updateJobData);
     getProfile(userType, context.setUserData);
-  }, [ context.setUserData,context.updateJobData]);
+  }, [context.setUserData]);
+  
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -92,7 +93,7 @@ const Header = () => {
                 color: "black",
               }}
               onClick={() => {
-                navigate(`/${item.link}`);
+                navigate(`${item.link}`);
               }}
             >
               {item.title}
@@ -122,7 +123,11 @@ const Header = () => {
         <Button id="basic-button" aria-haspopup="true" onClick={handleClick}>
           <Avatar
             style={{ width: "50px", height: "50px", marginLeft: "10px" }}
-            src={context?.userData?.profile ? context?.userData?.profile : "/broken-image.jpg"}
+            src={
+              context?.userData?.profile
+                ? context?.userData?.profile
+                : "/broken-image.jpg"
+            }
           />
           <ArrowDropDownIcon style={{ color: "black" }} />
         </Button>

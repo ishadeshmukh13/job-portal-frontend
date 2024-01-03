@@ -103,9 +103,9 @@ export async function SignUpApi(
     console.log(error, "errorrrrrrrrrrrrrrrrrrrr");
     setError(true);
     if (error?.response?.data?.error) {
-      setErrorMessage(error.response.data.error);
+      setErrorMessage(error?.response?.data?.error);
     } else {
-      setErrorMessage(error.response.data.message);
+      setErrorMessage(error?.response?.data?.message);
     }
   }
 }
@@ -229,7 +229,7 @@ export async function getApplyJobList(updateJobData) {
   }
 }
 
-export async function updateProfile( profileRemove, profileData) {
+export async function updateProfile( profileRemove, profileData,setMessage) {
   console.log(profileData,"profiledataaaa");
   let data = new FormData();
   if (profileData) {
@@ -252,7 +252,7 @@ export async function updateProfile( profileRemove, profileData) {
       }
     );
     if(response.data.message==="profile updated successfully"){
-      
+      setMessage("profile updated successfully")
     }
     console.log(response,"responseeee");
   } catch (error) {

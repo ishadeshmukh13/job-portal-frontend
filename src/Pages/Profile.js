@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import { MainGrid } from "./LandingPage";
 import Header from "../components/Header";
 import {
@@ -26,29 +26,33 @@ import { AppContext } from "../context/createContext";
 const Profile = () => {
   const context = useContext(AppContext);
   const fileInputRef = useRef(null);
-
+  const [message, setMessage] = useState("");
   const handleFileChange = (e) => {
     console.log(e.target.files[0], typeof userData.profile);
     setUserData({ ...userData, profile: e.target.files[0] });
-    changeProfile(e.target.files[0] )
-   
+    changeProfile(e.target.files[0]);
   };
 
   const handleClick = () => {
     fileInputRef.current.click();
   };
-  const changeProfile=(profile)=>{
-    updateProfile(false,profile);
-    getProfile(localStorage.getItem("userType"), context.setUserData);
-  }
+  const changeProfile = (profile) => {
+    updateProfile(false, profile, setMessage);
+  };
+  useEffect(() => {
+    if (message === "profile updated successfully") {
+      getProfile(localStorage.getItem("userType"), context.setUserData);
+      setMessage("")
+      handleClose()
+    }
+  }, [message]);
   const removeProfile = () => {
     setUserData({
       ...userData.city,
       profileRemove: true,
       profile: "",
     });
-    updateProfile(true, userData.profile);
-    getProfile(localStorage.getItem("userType"), context.setUserData);
+    updateProfile(true, userData.profile, setMessage);
   };
   const [userData, setUserData] = useState({
     profile: localStorage.getItem("profile"),
@@ -116,7 +120,7 @@ const Profile = () => {
               <BadgeIcon style={{ width: "50px", height: "50px" }} />
               Name{" "}
               <span style={{ marginTop: "10px", fontSize: "17px" }}>
-                {localStorage.getItem("name")}
+                {context.userData.name}
               </span>
             </Typography>
           </Box>
@@ -154,7 +158,7 @@ const Profile = () => {
                   fontSize: "17px",
                 }}
               >
-                {localStorage.getItem("email")}
+                {context.userData.email}
               </span>
             </Typography>
           </Box>
@@ -397,20 +401,21 @@ const Profile = () => {
                   setUserData({ ...userData, name: e.target.value });
                 }}
               />
-              <Typography>Email</Typography>
-              <TextField
-                onChange={(e) => {
-                  setUserData({ ...userData, email: e.target.value });
-                }}
-                variant="standard"
-                style={{ marginBottom: "20px" }}
-                value={userData.email}
-              />
+
               <Typography>Mobile No</Typography>
               <TextField
                 variant="standard"
                 style={{ marginBottom: "20px" }}
                 value={userData.mobile_no}
+              />
+              <Typography>City</Typography>
+              <TextField
+                variant="standard"
+                style={{ marginBottom: "20px" }}
+                value={userData.city}
+                onChange={(e) => {
+                  setUserData({ ...userData, city: e.target.value });
+                }}
               />
             </Grid>
             <Grid item xs={12} sm={6} style={{ padding: "20px" }}>
@@ -430,15 +435,6 @@ const Profile = () => {
                 value={userData.experience}
                 onChange={(e) => {
                   setUserData({ ...userData, experience: e.target.value });
-                }}
-              />
-              <Typography>City</Typography>
-              <TextField
-                variant="standard"
-                style={{ marginBottom: "20px" }}
-                value={userData.city}
-                onChange={(e) => {
-                  setUserData({ ...userData, city: e.target.value });
                 }}
               />
             </Grid>
