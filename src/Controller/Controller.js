@@ -58,10 +58,9 @@ export async function getProfile(userType, setUserData) {
       localStorage.setItem("email", response?.data?.data?.email);
       localStorage.setItem("name", response?.data?.data?.name);
       localStorage.setItem("mobile_no", response?.data?.data?.mobile_no);
-      localStorage.setItem("skills", response?.data?.data?.skills); 
-      localStorage.setItem("experience", response?.data?.data?.experience); 
-      localStorage.setItem("city", response?.data?.data?.city); 
-      
+      localStorage.setItem("skills", response?.data?.data?.skills);
+      localStorage.setItem("experience", response?.data?.data?.experience);
+      localStorage.setItem("city", response?.data?.data?.city);
     }
   } catch (error) {
     console.error("Error posting data:", error);
@@ -190,7 +189,7 @@ export async function getJobData(updateJobData) {
   }
 }
 
-export async function getApplyJob(job_id,setPopUp,setMessage) {
+export async function getApplyJob(job_id, setPopUp, setMessage) {
   try {
     const response = await axios.post(
       `http://localhost:8800/${localStorage.getItem("userType")}/apply-job`,
@@ -203,10 +202,9 @@ export async function getApplyJob(job_id,setPopUp,setMessage) {
         },
       }
     );
-    setPopUp(true)
-    setMessage(response?.data?.message)
+    setPopUp(true);
+    setMessage(response?.data?.message);
     console.log(response, "controller");
-  
   } catch (error) {
     console.error("Error posting data:", error);
   }
@@ -215,18 +213,51 @@ export async function getApplyJob(job_id,setPopUp,setMessage) {
 export async function getApplyJobList(updateJobData) {
   try {
     const response = await axios.get(
-      `http://localhost:8800/${localStorage.getItem("userType")}/apply-job-list`,
-     
+      `http://localhost:8800/${localStorage.getItem(
+        "userType"
+      )}/apply-job-list`,
+
       {
         headers: {
           Authorization: `${localStorage.getItem("token")}`,
         },
       }
     );
-  updateJobData(response?.data?.data)
-  
+    updateJobData(response?.data?.data);
   } catch (error) {
     console.error("Error posting data:", error);
   }
 }
+
+export async function updateProfile( profileRemove, profileData) {
+  console.log(profileData,"profiledataaaa");
+  let data = new FormData();
+  if (profileData) {
+  console.log(profileData,"profiledataaaaaaaaaaaaaaaaa");
+
+    data.append("profile", profileData);
+  } else if (profileRemove == true) {
+    data.append("profileremove", true);
+  }
+  try {
+    const response = await axios.post(
+      `http://localhost:8800/${localStorage.getItem(
+        "userType"
+      )}/update-profile`,
+      data,
+      {
+        headers: {
+          Authorization: `${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    if(response.data.message==="profile updated successfully"){
+      
+    }
+    console.log(response,"responseeee");
+  } catch (error) {
+    console.error("Error posting data:", error);
+  }
+}
+
 export default loginApi;

@@ -24,11 +24,10 @@ const Header = () => {
     { title: "Candidates", link: "/candidates" },
     { title: "Created Jobs", link: "/createdJobs" },
   ];
-  const [userData, setUserData] = useState({});
   useEffect(() => {
     getJobData(context.updateJobData);
-    getProfile(userType, setUserData);
-  }, []);
+    getProfile(userType, context.setUserData);
+  }, [ context.setUserData,context.updateJobData]);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -46,7 +45,7 @@ const Header = () => {
     navigate("/profile");
     handleClose();
   };
- 
+
   return (
     <Grid
       style={{
@@ -118,16 +117,12 @@ const Header = () => {
           }}
         >
           {" "}
-          {userData?.name}
+          {context?.userData?.name}
         </Typography>
-        <Button
-          id="basic-button"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
+        <Button id="basic-button" aria-haspopup="true" onClick={handleClick}>
           <Avatar
-            style={{ width: "50px", height: "50px", paddingLeft: "10px" }}
-            src={userData?.profile ? userData?.profile : "/broken-image.jpg"}
+            style={{ width: "50px", height: "50px", marginLeft: "10px" }}
+            src={context?.userData?.profile ? context?.userData?.profile : "/broken-image.jpg"}
           />
           <ArrowDropDownIcon style={{ color: "black" }} />
         </Button>

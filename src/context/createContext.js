@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useEffect } from "react";
 export const AppContext = createContext();
 import { useState } from "react";
 const ShareContext = (props) => {
@@ -6,6 +6,7 @@ const ShareContext = (props) => {
   const [companyData, setCompanyData] = useState([]);
   const [allJob, setAllJob] = useState([]);
   const [applyJobList, setApplyJobList] = useState([]);
+  const [userData, setUserData] = useState({});
   const updateUserType = (type) => {
     localStorage.setItem("userType",type)
    setUserType(type)
@@ -19,8 +20,9 @@ const ShareContext = (props) => {
   const updateApplyJobData=(data)=>{
     setApplyJobList(data)
   }
+
   return (
-    <AppContext.Provider value={{ userType, updateUserType ,companyData,updateCompany,updateJobData,allJob,updateApplyJobData,applyJobList}}>
+    <AppContext.Provider value={{ userType, updateUserType ,companyData,updateCompany,updateJobData,allJob,updateApplyJobData,applyJobList,setUserData,userData}}>
       {props.children}
     </AppContext.Provider>
   );
