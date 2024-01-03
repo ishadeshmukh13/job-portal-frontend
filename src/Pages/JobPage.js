@@ -42,7 +42,7 @@ const JobPage = () => {
           {message}
         </MuiAlert>
       </Snackbar>
-      <JobList data={data} handleApplyJob={handleApplyJob} apply={true} />
+      <JobList data={data} handleApplyJob={handleApplyJob} apply={true}   padding="150px"/>
     </MainGrid>
   );
 };

@@ -7,10 +7,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 const image = require("../assests/item.jpg");
 
-const JobList = ({ data, handleApplyJob, apply }) => {
+const JobList = ({ data, handleApplyJob, apply ,padding}) => {
   return (
     <Grid style={{
-            paddingBlock: "150px",
+            paddingBlock: padding,
 
           }}>
       <Grid item style={styleList.detailsStyle}>

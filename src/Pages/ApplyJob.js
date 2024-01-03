@@ -16,7 +16,7 @@ const ApplyJob = () => {
     <MainGrid>
       <Header />
       {data && data.length > 0 ? (
-        <JobList data={data} />
+        <JobList data={data}   padding="150px"/>
       ) : (
         <Typography
           style={{

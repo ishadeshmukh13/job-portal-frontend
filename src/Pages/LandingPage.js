@@ -119,6 +119,7 @@ const LandingPage = () => {
               data={context.allJob.slice(0, 3)}
               handleApplyJob={handleApplyJob}
               apply={true}
+              padding="50px"
             />
           )}
         </Box>
